@@ -3,8 +3,12 @@ import Loadable from 'react-loadable'
 import LoadingPage from './pages/LoadingPage'
 
 export const AsyncLogin = Loadable({
-  loader: () =>
-    import('Containers/LoginPage' /* webpackChunkName: "LoginPage" */),
+  loader: () => import('Containers/Signin' /* webpackChunkName: "LoginPage" */),
+  loading: LoadingPage,
+})
+
+export const AsyncSignup = Loadable({
+  loader: () => import('Containers/Signup'),
   loading: LoadingPage,
 })
 
@@ -26,14 +30,9 @@ export const AsyncCreateEditProduct = Loadable({
   loading: LoadingPage,
 })
 
-// Modal page example
-export const AsyncModalExample = Loadable({
-  loader: () => import('Containers/ModalExample'),
+
+
+export const AsyncHomePage = Loadable({
+  loader: () => import('Components/pages/Home'),
   loading: LoadingPage,
 })
-
-// Test loading page
-// export const AsyncLoading = Loadable({
-//   loader: () => import('./pages/LoadingPage'),
-//   loading: LoadingPage,
-// })

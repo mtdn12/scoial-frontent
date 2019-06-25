@@ -6,10 +6,8 @@ import { ModalActions } from 'Stores/Modal/Actions'
 import { getModal } from 'Stores/Modal/Selectors'
 import { getLoadingAction } from '../Stores/Loading/Selectors'
 import ConfirmationDialog from './ConfirmationDialog'
-import LoginModal from './LoginModal'
-import RegisterModal from './RegisterModal'
 
-const modalLookup = { ConfirmationDialog, LoginModal, RegisterModal }
+const modalLookup = { ConfirmationDialog }
 
 const Modal = props => {
   const { modal, isLoadingAction, handleClose } = props

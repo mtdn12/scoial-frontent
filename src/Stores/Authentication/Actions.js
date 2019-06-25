@@ -3,17 +3,9 @@ import { MODULE_NAME } from './InitialState'
 
 const { Types, Creators } = createActions(
   {
-    // Fetch the current weather temperature
-    fetchAuthentication: ['response'],
-    // The operation has started and is loading
-    fetchAuthenticationLoading: null,
-    // The temperature was successfully fetched
-    fetchAuthenticationSuccess: ['userData'],
-    // An error occurred
-    fetchAuthenticationFailure: ['errorMessage'],
     // Login modal
     loginRequest: ['values'],
-    loginSuccess: null,
+    loginSuccess: ['user'],
     loginFailure: null,
     // Register modal
     registerRequest: ['values'],
@@ -21,6 +13,9 @@ const { Types, Creators } = createActions(
     registerFailure: null,
     // log out
     doLogout: null,
+    // Set and clear signinItem
+    setSigninItem: ['item'],
+    clearSigninItem: null,
   },
   {
     prefix: `@@${MODULE_NAME}/`,

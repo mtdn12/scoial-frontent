@@ -3,5 +3,5 @@ export const showTitle = path => {
     '/product': 'Product',
     '/modalExample': 'Modal Example',
   }
-  return lookUp[path] ? lookUp[path] : 'React Template V4'
+  return lookUp[path] ? lookUp[path] : 'Social-App'
 }

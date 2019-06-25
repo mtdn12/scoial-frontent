@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -7,22 +6,18 @@ import {
   Typography,
   MenuItem,
   Menu as MuiMenu,
+  Button,
 } from '@material-ui/core'
-import { compose } from 'redux'
-import { withStyles } from '@material-ui/core/styles'
-import { ArrowBack, Menu, AccountCircle } from '@material-ui/icons'
+import { NavLink } from 'react-router-dom'
+import { AccountCircle } from '@material-ui/icons'
 import PropTypes from 'prop-types'
-import styles from './styles'
+import useStyles from './styles'
 import { showTitle } from 'Utils/showTitle'
 
-function NavBar({
-  match,
-  handleShowDrawer,
-  isShowDrawer,
-  classes,
-  userData,
-  handleSignOut,
-}) {
+const RefLink = React.forwardRef((props, ref) => <NavLink {...props} />)
+
+function NavBar({ match, userData, handleSignOut }) {
+  const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleMenu = event => {
@@ -38,9 +33,6 @@ function NavBar({
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <IconButton onClick={handleShowDrawer} className={classes.icon}>
-          {isShowDrawer ? <ArrowBack /> : <Menu />}
-        </IconButton>
         <Typography
           variant="subtitle1"
           color="primary"
@@ -76,6 +68,28 @@ function NavBar({
             </MuiMenu>
           </div>
         )}
+        {!userData && (
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.btn}
+            activeClassName={classes.activeBtn}
+            component={RefLink}
+            to="/signin">
+            Signin
+          </Button>
+        )}
+        {!userData && (
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.btn}
+            activeClassName={classes.activeBtn}
+            component={RefLink}
+            to="/signup">
+            Signup
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   )
@@ -83,14 +97,8 @@ function NavBar({
 
 NavBar.propTypes = {
   match: PropTypes.object,
-  handleShowDrawer: PropTypes.func,
-  classes: PropTypes.object,
-  isShowDrawer: PropTypes.bool,
   userData: PropTypes.object,
   handleSignOut: PropTypes.func,
 }
 
-export default compose(
-  withRouter,
-  withStyles(styles)
-)(NavBar)
+export default NavBar

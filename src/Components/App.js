@@ -1,9 +1,8 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
 import { MuiThemeProvider } from '@material-ui/core/styles'
-import PrivateRoute from 'Containers/PrivateRoute'
-import PrivateRouteWithTemplate from '../Containers/PrivateRouteWithTemplate'
+import RouteWithTemplate from '../Containers/RouteWithTemplate'
 import ErrorBoundary from './pages/ErrorBoundary'
 import * as routes from './routes'
 import theme from '../Theme'
@@ -13,24 +12,30 @@ const App = () => (
     <CssBaseline />
     <ErrorBoundary>
       <Switch>
-        <Route path="/login" component={routes.AsyncLogin} />
-        <Redirect exact from="/" to="/modalExample" />
-        <PrivateRouteWithTemplate
+        <RouteWithTemplate
+          path="/signin"
+          component={routes.AsyncLogin}
+          prevent={{ auth: true }}
+        />
+        <RouteWithTemplate
+          path="/signup"
+          component={routes.AsyncSignup}
+          prevent={{ auth: true }}
+        />
+        <RouteWithTemplate exact path="/" component={routes.AsyncHomePage} />
+        <RouteWithTemplate
           path="/product"
           exact
+          prevent={{ public: true }}
           component={routes.AsyncProduct}
         />
-        <PrivateRouteWithTemplate
-          path="/modalExample"
-          exact
-          component={routes.AsyncModalExample}
-        />
-        <PrivateRoute
+
+        <RouteWithTemplate
           path="/product/create"
           exact
           component={routes.AsyncCreateEditProduct}
         />
-        <PrivateRoute
+        <RouteWithTemplate
           path="/product/edit/:id"
           exact
           component={routes.AsyncCreateEditProduct}

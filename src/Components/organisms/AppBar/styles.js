@@ -1,3 +1,5 @@
+import { makeStyles } from '@material-ui/styles'
+
 const styles = theme => ({
   textField: {
     margin: '8px 0',
@@ -12,6 +14,15 @@ const styles = theme => ({
   icon: {
     color: '#fff',
   },
+  btn: {
+    marginRight: 16,
+  },
+  activeBtn: {
+    background: '#fff',
+    color: theme.palette.primary.main,
+  },
 })
 
-export default styles
+const useStyles = makeStyles(styles)
+
+export default useStyles
