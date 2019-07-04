@@ -1,7 +1,6 @@
 import React from 'react'
 import { bool } from 'prop-types'
 import { LinearProgress } from '@material-ui/core'
-
 import Template from '../../templates/NonAuthTemplate'
 
 const LoadingPage = props => {

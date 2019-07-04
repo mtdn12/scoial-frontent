@@ -29,7 +29,12 @@ const App = () => (
           prevent={{ public: true }}
           component={routes.AsyncProduct}
         />
-
+        <RouteWithTemplate
+          path="/profile/:id"
+          exact
+          prevent={{ public: true }}
+          component={routes.AsyncProfile}
+        />
         <RouteWithTemplate
           path="/product/create"
           exact

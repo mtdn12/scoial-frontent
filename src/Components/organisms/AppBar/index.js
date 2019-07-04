@@ -7,6 +7,7 @@ import {
   MenuItem,
   Menu as MuiMenu,
   Button,
+  Tooltip,
 } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import { AccountCircle } from '@material-ui/icons'
@@ -16,7 +17,7 @@ import { showTitle } from 'Utils/showTitle'
 
 const RefLink = React.forwardRef((props, ref) => <NavLink {...props} />)
 
-function NavBar({ match, userData, handleSignOut }) {
+function NavBar({ match, userData, handleSignOut, history }) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -30,6 +31,10 @@ function NavBar({ match, userData, handleSignOut }) {
     handleClose()
     handleSignOut()
   }
+  const showProfile = id => () => {
+    handleClose()
+    history.push(`/profile/${id}`)
+  }
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -41,14 +46,16 @@ function NavBar({ match, userData, handleSignOut }) {
         </Typography>
         {userData && (
           <div>
-            <IconButton
-              aria-haspopup="true"
-              aria-label="Account of current user"
-              onClick={handleMenu}
-              color="inherit"
-              aria-controls="show-profile">
-              <AccountCircle />
-            </IconButton>
+            <Tooltip title={userData.get('name')}>
+              <IconButton
+                aria-haspopup="true"
+                aria-label="Account of current user"
+                onClick={handleMenu}
+                color="inherit"
+                aria-controls="show-profile">
+                <AccountCircle />
+              </IconButton>
+            </Tooltip>
             <MuiMenu
               id="show-profile"
               anchorEl={anchorEl}
@@ -63,7 +70,9 @@ function NavBar({ match, userData, handleSignOut }) {
                 horizontal: 'right',
               }}
               onClose={handleClose}>
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={showProfile(userData.get('_id'))}>
+                Profile
+              </MenuItem>
               <MenuItem onClick={doLogout}>Logout</MenuItem>
             </MuiMenu>
           </div>

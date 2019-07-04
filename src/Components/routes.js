@@ -30,9 +30,13 @@ export const AsyncCreateEditProduct = Loadable({
   loading: LoadingPage,
 })
 
-
-
 export const AsyncHomePage = Loadable({
   loader: () => import('Components/pages/Home'),
+  loading: LoadingPage,
+})
+
+// Profile page
+export const AsyncProfile = Loadable({
+  loader: () => import('Containers/Profile'),
   loading: LoadingPage,
 })

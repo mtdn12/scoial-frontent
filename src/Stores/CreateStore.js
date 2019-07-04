@@ -25,7 +25,7 @@ import { MODULE_NAME as loadingName } from './Loading/InitialState'
 const persistConfig = {
   transforms: [immutableTransform()],
   key: 'root',
-  keyPrefix: 'Template-react', // Key prefix when save to local storage, need declare to avoid conflict between projects
+  keyPrefix: 'SocialFrontend', // Key prefix when save to local storage, need declare to avoid conflict between projects
   storage: storage,
   /**
    * White list State . These reducer will be persisted by redux-persist
@@ -42,7 +42,6 @@ const createRootStore = history => {
   middleware.push(routerMiddleware(history))
   enhancers.push(applyMiddleware(...middleware))
   let composeEnhancers = compose
-
   if (
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
